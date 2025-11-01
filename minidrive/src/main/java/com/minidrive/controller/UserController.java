@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.minidrive.dtorequest.UserCreationRequest;
-import com.minidrive.dtorequest.UserUpdateRequest;
+import com.minidrive.dto.request.UserCreationRequest;
+import com.minidrive.dto.request.UserUpdateRequest;
+import com.minidrive.dto.response.ApiResponse;
+import com.minidrive.dto.response.UserResponse;
 import com.minidrive.model.User;
 import com.minidrive.service.UserService;
 
@@ -31,8 +33,10 @@ public class UserController {
     private UserService userService;
 
     @PostMapping
-    User createUser (@RequestBody @Valid UserCreationRequest request) {
-        return userService.createUser(request);
+    ApiResponse<User> createUser (@RequestBody @Valid UserCreationRequest request) {
+        ApiResponse<User> apiResponse = new ApiResponse<>();
+        apiResponse.setResult(userService.createUser(request));
+        return apiResponse;
     }
     
     @GetMapping("")
@@ -41,12 +45,12 @@ public class UserController {
     }
 
     @GetMapping("/{userId}")
-    User getUser(@PathVariable String userId) {
+    UserResponse getUser(@PathVariable String userId) {
         return userService.getUser(userId);
     }
 
     @PutMapping("/{userId}")
-    User updateUser(@PathVariable String userId, @RequestBody UserUpdateRequest request) {
+    UserResponse updateUser(@PathVariable String userId, @RequestBody UserUpdateRequest request) {
         return userService.updateUser(userId, request);
     }
     

@@ -2,6 +2,7 @@ package com.minidrive.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 @Entity
 @Table(name = "users")
@@ -9,15 +10,16 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;                
+    String id;                
 
     @Column(nullable = false, unique = true)
-    private String username;      
+    String username;      
 
     @Column(nullable = false)
-    private String password;      
+    String password;      
 }
