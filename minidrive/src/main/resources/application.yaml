@@ -1,3 +1,21 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /minidrive
+
 spring:
-  application:
-    name: minidrive
+  datasource:
+    url: jdbc:mysql://localhost:3306/minidrive?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
